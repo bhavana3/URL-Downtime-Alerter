@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+   <h:head>
+      <title>Downtime Alerter</title>
+   </h:head>
+   <h:body>
+      <f:view>
+         <h:form id="doalForm">
+             <h4 style="font-size: 20px">Alerter</h4>
+               <h:panelGrid columns="5">
+                  <h:outputLabel value = "Enter the URL in format - https:\\www.domainname"
+                     for = "string"/>
+                  <h:inputText id = "string"
+                     value="#{messengerController.converter.URL}"
+                        required="true"
+                            binding="#{messengerController.stringInput}"/>
+                  <h:message for="number"/>
+               </h:panelGrid>
+
+               <div>
+                  <h:commandButton
+                     action="#{messengerController.sendMessage()}"
+                     value="Send Status"/> &nbsp;&nbsp;
+                  <h:commandButton
+                     action="#{messengerController.clear()}"
+                     value="clear" immediate="true"/>
+               </div>
+         </h:form>
+         <h:panelGroup
+                binding="#{messengerController.resultPanel}"
+                rendered="false">
+            <h4>Result</h4>
+            <h:panelGrid columns="1">
+               <h:outputText value="URL
+                  #{messengerController.converter.URL}"/>
+               <h:outputText value="Response Code
+                  #{messengerController.converter.result}"/>
+            </h:panelGrid>
+         </h:panelGroup>
+
+      </f:view>
+   </h:body>
+</html>
